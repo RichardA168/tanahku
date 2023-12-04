@@ -1,10 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const db = require('../dbConfig');
+const authToken = require('../middleware/auth');
 
 const register = express.Router();
 
-register.post('/', async (req, res) => {
+register.post('/', authToken, async (req, res) => {
     try {
         
         const userCheckDup = "SELECT * FROM `users-tanahku` WHERE `name` = ? OR `email` = ?";

@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const db = require('../dbConfig');
 
 const login = express.Router();
@@ -11,16 +12,17 @@ login.post('/', (req, res) => {
             return res.json("error");
         }
         if (data.length > 0) {
-            const match = await bcrypt.compare(req.body.password, data[0].password);
+            const match = bcrypt.compareSync(req.body.password, data[0].password);
             if (match) {
-                return res.json("Login Success");
+                const token = jwt.sign({userId: data[0].id, userEmail: data[0].email}, process.env.JWT_SECRET, {expiresIn:'24h'});
+                return res.json({ message: "Login Success", token });
             } else {
                 return res.json("Login Failed");
             }
         } else {
             return res.json("Failed");
         }
-    })
+    });
 });
 
 module.exports = login;
