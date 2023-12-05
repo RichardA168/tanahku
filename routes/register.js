@@ -5,7 +5,7 @@ const authToken = require('../middleware/auth');
 
 const register = express.Router();
 
-register.post('/', authToken, async (req, res) => {
+register.post('/', async (req, res) => {
     try {
         
         const userCheckDup = "SELECT * FROM `users-tanahku` WHERE `name` = ? OR `email` = ?";
@@ -14,11 +14,11 @@ register.post('/', authToken, async (req, res) => {
         db.query(userCheckDup, userCheckData, async (userFoundDup, userFoundData) => {
             if (userFoundDup) {
                 console.error(userFoundDup);
-                return res.json("error");
+                return res.status(500).json({ error: "An error occurred" });
             }
 
             if (userFoundData.length > 0) {
-                return res.json("Username or email already exists");
+                return res.status(400).json("Username or email already exists");
             }
 
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -32,14 +32,14 @@ register.post('/', authToken, async (req, res) => {
             db.query(sql, values, (err, data) => {
                 if (err) {
                     console.error(err);
-                    return res.json("error");
+                    return res.status(500).json({ error: "An error occurred" });
                 }
-                return res.json("Register Success");
+                return res.status(201).json({ message: "Register Success" });
             });
         });
     } catch (error) {
         console.error(error);
-        return res.json("error");
+        return res.status(500).json({ error: "An error occurred" });  
     }
 });
 

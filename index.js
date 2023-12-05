@@ -14,7 +14,7 @@ app.use(express.json());
 app.use('/register', register);
 app.use('/login', login);
 
-app.use('/protected-route', authToken, (req, res) => {
+app.use('/login', authToken, (req, res) => {
     res.json({ message: 'This route is protected.' });
 });
 
