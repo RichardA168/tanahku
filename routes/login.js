@@ -9,7 +9,7 @@ login.post('/', (req, res) => {
     const sql = "SELECT * FROM `users-tanahku` WHERE `email` = ?";
     db.query(sql, [req.body.email], async (err, data) => {
         if (err) {
-            return res.status(500).json("error");
+            return res.status(500).json({ error: true, message: "Internal Server Error" });
         }
         if (data.length > 0) {
             const match = bcrypt.compareSync(req.body.password, data[0].password);
@@ -17,12 +17,19 @@ login.post('/', (req, res) => {
                 const token = jwt.sign({ userId: data[0].id, userEmail: data[0].email },
                     process.env.JWT_SECRET,
                     { expiresIn: '24h' });
-                return res.status(201).json({ message: "Login Success", token });
+
+                const loginResult = {
+                    userId: data[0].id,
+                    name: data[0].name,
+                    token: token
+                };
+
+                return res.status(201).json({ error: false, message: "Login Success", loginResult });
             } else {
-                return res.status(401).json("Login Failed");
+                return res.status(401).json({ error: true, message: "Login Failed" });
             }
         } else {
-            return res.status(404).json("User not found");
+            return res.status(404).json({ error: true, message: "User not found" });
         }
     });
 });

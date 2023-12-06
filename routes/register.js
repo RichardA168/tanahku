@@ -18,7 +18,7 @@ register.post('/', async (req, res) => {
             }
 
             if (userFoundData.length > 0) {
-                return res.status(400).json("Username or email already exists");
+                return res.status(400).json({ error: true, message: "Username or email already exists" });
             }
 
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -34,7 +34,7 @@ register.post('/', async (req, res) => {
                     console.error(err);
                     return res.status(500).json({ error: "An error occurred" });
                 }
-                return res.status(201).json({ message: "Register Success" });
+                return res.status(201).json({ error: false, message: "User Created" });
             });
         });
     } catch (error) {
