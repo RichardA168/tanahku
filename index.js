@@ -5,6 +5,7 @@ const login = require('./routes/login');
 const authToken = require('./middleware/auth');
 require('dotenv').config();
 const db = require('./dbConfig');
+const data = require('./routes/data');
 
 const app = express();
 
@@ -17,6 +18,9 @@ app.use('/login', login);
 app.use('/login', authToken, (req, res) => {
     res.json({ message: 'This route is protected.' });
 });
+
+app.use('/tanaman',data);
+app.use('/tanaman/:id_tanaman',data); 
 
 const PORT = 8080;
 app.listen(PORT, () => {
