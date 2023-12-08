@@ -1,10 +1,11 @@
 const express = require('express');
 const db = require('../dbConfig');
 
-const data = express.Router();
+const datatanah = express.Router();
 
-data.get("/", async (req,res)=>{
-    const sql="SELECT * FROM tanaman";
+
+datatanah.get ("/", async (req,res)=>{
+    const sql="SELECT * FROM tanah";
     db.query(sql,function(err,result,fields){
         if(err){
             console.log(err);
@@ -14,9 +15,9 @@ data.get("/", async (req,res)=>{
     });
 });
 
-data.get("/:id_tanaman", async (req,res)=>{
-    const sql="SELECT * FROM tanaman where id_tanaman =?";
-    const id_tanaman = req.params.id_tanaman;
+datatanah.get("/:id_tanah", async (req,res)=>{
+    const sql="SELECT * FROM tanah where id_tanah =?";
+    const id_tanaman = req.params.id_tanah;
     db.query(sql,[id_tanaman],function(err,result,fields){
         if(err){
             console.log(err);
@@ -26,6 +27,4 @@ data.get("/:id_tanaman", async (req,res)=>{
     });
 });
 
-
-
-module.exports = data;
+module.exports= datatanah;
