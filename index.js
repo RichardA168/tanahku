@@ -5,6 +5,10 @@ const login = require('./routes/login');
 const authToken = require('./middleware/auth');
 require('dotenv').config();
 const db = require('./dbConfig');
+const datatanah = require('./routes/datatanah');
+const datatanaman = require('./routes/datatanaman');
+const tanahtanaman = require('./routes/tanahtanaman');
+
 
 const app = express();
 
@@ -17,6 +21,14 @@ app.use('/login', login);
 app.use('/login', authToken, (req, res) => {
     res.json({ message: 'This route is protected.' });
 });
+
+app.use('/tanaman',datatanaman);
+app.use('/tanaman/:id_tanaman',datatanaman);
+
+app.use('/tanah/',datatanah);
+app.use('/tanah/:id_tanah',datatanah);
+
+app.use('/kecocokan/',tanahtanaman);
 
 const PORT = 8080;
 app.listen(PORT, () => {
