@@ -41,6 +41,7 @@ login.post(
           const loginResult = {
             userId: data[0].id,
             name: data[0].name,
+            email: data[0].email,
             token: token
           };
 
@@ -58,7 +59,7 @@ login.post(
 
 function handleDatabaseError(err, res) {
   console.log('Error connecting to MySQL:', err);
-  return res.status(500).json({ error: true, message: "Internal Server Error" });
+  return res.status(500).json({ error: true, message: "Internal Server Error", details: err.message});
 }
 
 module.exports = login;
