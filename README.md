@@ -14,7 +14,7 @@ For the backend API, we use Express.js to create endpoints, deployed on Google A
   "password": "string"
 }
 ```
----
+___
 ### Register
 - Method: POST
 - Url: /register
