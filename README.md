@@ -25,3 +25,21 @@ For the backend API, we use Express.js to create endpoints, deployed on Google A
   "password": "string"
 }
 ```
+
+### Database
+- Get tanaman
+- Method: GET
+- Url: /tanaman
+```json
+{
+  "id_tanaman": "string",
+  "nama_tanaman": "string",
+  "nama_latin_tanaman": "string",
+  "desc_tanaman": "string",
+  "habitat_tanaman": "string",
+  "kegunaan1": "string",
+  "kegunaan2": "string",
+  "kegunaan3": "string",
+  "gambar_tanaman": "string",
+}
+```
