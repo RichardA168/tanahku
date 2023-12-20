@@ -14,7 +14,7 @@ For the backend API, we use Express.js to create endpoints, deployed on Google A
   "password": "string"
 }
 ```
-___
+---
 ### Register
 - Method: POST
 - Url: /register
@@ -61,7 +61,7 @@ ___
   "gambar_tanaman": "string",
 }
 ```
-
+---
 ### tanah
 - Method: GET
 - Url: /tanah
@@ -95,7 +95,7 @@ ___
   "gambar_tanah": "string",
   }
 ```
-
+---
 ### kecocokan tanah and tanaman
 - Method: GET
 - Url: /kecocokan/id_tanah
