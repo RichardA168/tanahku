@@ -5,11 +5,6 @@ Description: For the backend API, we use Express.js to create endpoints, deploye
 ## Documentation
 
 ### Login
-
-- **Method:** POST
-- **URL:** `/login`
-
-### Login
 - Method: POST
 - Url: /login
 ```json
@@ -19,11 +14,13 @@ Description: For the backend API, we use Express.js to create endpoints, deploye
 }
 ```
 
-Register
-Method: POST
-Url: /register
+### Register
+- Method: POST
+- Url: /register
+```json
 {
   "name": "string",
   "email": "string",
   "password": "string"
 }
+```
