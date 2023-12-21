@@ -22,8 +22,8 @@ register.post(
 
       const { name, email, password } = req.body;
 
-      const userCheckDataQuery = "SELECT * FROM `users-tanahku` WHERE `name` = ? OR `email` = ?";
-      const userCheckDup = [name, email];
+      const userCheckDataQuery = "SELECT * FROM `users-tanahku` WHERE `email` = ?";
+      const userCheckDup = [email];
 
       db.query(userCheckDataQuery, userCheckDup, async (userCheckEmpty, userFoundDup) => {
         if (userCheckEmpty) {
